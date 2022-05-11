@@ -23,10 +23,12 @@ a {
 	--black: #3B434E;
 	--white: #FFF;
 	--primary: #7653FC;
+	--primary-hover: #6343E2;
 	--red: #FC836D;
 	--green: #1DC37E;
 	--gren-light: #C8F8E4;
 	--background: #E5E5E5;
+	--grey-light: #EBEBEB;
 	--font-family:
 		"Noto Sans",
 		sans-serif;
