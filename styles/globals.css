@@ -24,11 +24,13 @@ a {
 	--white: #FFF;
 	--primary: #7653FC;
 	--primary-hover: #6343E2;
-	--red: #FC836D;
+	--red-light: #FC836D;
 	--green: #1DC37E;
-	--gren-light: #C8F8E4;
+	--green-light: #C8F8E4;
 	--background: #E5E5E5;
 	--grey-light: #EBEBEB;
+	--grey: #B3C0D9;
+	--red: #DE0000;
 	--font-family:
 		"Noto Sans",
 		sans-serif;
