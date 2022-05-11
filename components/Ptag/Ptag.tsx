@@ -1,7 +1,7 @@
 import React from "react";
 import { PtagProps } from "./Ptag.props";
 import styles from './Ptag.module.css';
-import cn from 'classnames'ж
+import cn from 'classnames';
 
 export const Ptag = ({ size, children, className, ...props}: PtagProps): JSX.Element => {
   return (<p className={cn(styles.p, className, {
