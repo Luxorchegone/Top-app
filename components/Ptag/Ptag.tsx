@@ -1,5 +1,5 @@
-import React from "react";
-import { PtagProps } from "./Ptag.props";
+import React from 'react';
+import { PtagProps } from './Ptag.props';
 import styles from './Ptag.module.css';
 import cn from 'classnames';
 

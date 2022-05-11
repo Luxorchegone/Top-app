@@ -1,10 +1,10 @@
-import { DetailedHTMLProps, HTMLAttributes, ReactNode } from "react";
+import { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react';
 
 export interface PtagProps
   extends DetailedHTMLProps<
     HTMLAttributes<HTMLParagraphElement>,
     HTMLParagraphElement
   > {
-  size?: "s" | "m" | "l";
+  size?: 's' | 'm' | 'l';
   children: ReactNode;
 }
