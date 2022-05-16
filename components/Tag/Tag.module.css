@@ -22,7 +22,7 @@
 }
 
 .ghost {
-	border: 1px solid var(--grey-light);
+	border: 1px solid var(--gray-light);
 	background: none;
 }
 
@@ -33,9 +33,9 @@
 	font-weight: bold;
 }
 
-.grey {
+.gray {
 	color: var(--white);
-	background-color: var(--grey);
+	background-color: var(--gray);
 
 	font-weight: bold;
 }

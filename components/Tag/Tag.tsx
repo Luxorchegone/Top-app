@@ -17,7 +17,7 @@ export const Tag = ({
         [styles.red]: color == 'red',
         [styles.ghost]: color == 'ghost',
         [styles.primary]: color == 'primary',
-        [styles.grey]: color == 'grey',
+        [styles.gray]: color == 'gray',
         [styles.green]: color == 'green',
         [styles.s]: size == 's',
         [styles.m]: size == 'm',
