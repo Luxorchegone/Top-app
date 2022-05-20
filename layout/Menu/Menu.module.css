@@ -34,7 +34,15 @@
 	line-height: 16px;
 }
 
+.secondLevelBlock {
+	display: none;
+}
+
 .secondLevelBlockOpen {
+	display: block;
+}
+
+.secondLevelBlockOpen:last-child {
 	margin-bottom: 20px;
 }
 
