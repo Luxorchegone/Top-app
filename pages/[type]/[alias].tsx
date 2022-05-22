@@ -1,22 +1,25 @@
-import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
-import React, { useState } from "react";
-import { Htag, Button, Ptag, Tag, Rating } from "../../components";
-import { withLayout } from "../../layout/Layout";
-import axios from "axios";
-import { MenuItem } from "../../interfaces/menu.interface";
+import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next';
+import React from 'react';
+import { withLayout } from '../../layout/Layout';
+import axios from 'axios';
+import { MenuItem } from '../../interfaces/menu.interface';
 import {
   TopLevelCategory,
   TopPageModel,
-} from "../../interfaces/page.interface";
-import { ParsedUrlQuery } from "querystring";
-import { ProductModel } from "../../interfaces/product.interface";
-import { firstLevelMenu } from "../../helpers/helpers";
+} from '../../interfaces/page.interface';
+import { ParsedUrlQuery } from 'querystring';
+import { ProductModel } from '../../interfaces/product.interface';
+import { firstLevelMenu } from '../../helpers/helpers';
+import { TopPageComponent } from '../../page-components';
 
-function Course({ menu, page, products }: CourseProps): JSX.Element {
-  return <>{products && products.length}</>;
+function TopPage({firstCategory, menu, page, products }: CourseProps): JSX.Element {
+  return <TopPageComponent 
+		firstCategory={firstCategory}
+		page={page}
+		products={products}/>;
 }
 
-export default withLayout(Course);
+export default withLayout(TopPage);
 
 export const getStaticPaths: GetStaticPaths = async () => {
   let paths: string[] = [];
@@ -24,13 +27,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
   for (const m of firstLevelMenu) {
     //получаем данные по всем категориям
     const { data: menu } = await axios.post<MenuItem[]>(
-      process.env.NEXT_PUBLIC_DOMAIN + "/api/top-page/find",
+      process.env.NEXT_PUBLIC_DOMAIN + '/api/top-page/find',
       { firstCategory: m.id }
     );
     paths = paths.concat(
       //убираем вложенность => получаем массив статических путей
-      menu.flatMap((item) =>
-        item.pages.map((page) => `/${m.route}/${page.alias}`)
+      menu.flatMap((item) =>item.pages.map((page) => `/${m.route}/${page.alias}`)
       )
     );
   }
@@ -61,10 +63,10 @@ export const getStaticProps: GetStaticProps<CourseProps> = async ({
   try {
     //получаем список направлений курсов
     const { data: menu } = await axios.post<MenuItem[]>(
-      process.env.NEXT_PUBLIC_DOMAIN + "/api/top-page/find",
+      process.env.NEXT_PUBLIC_DOMAIN + '/api/top-page/find',
       { firstCategory: firstCategoryItem.id }
     );
-    if (menu.length) {
+    if (menu.length == 0) {
       return {
         notFound: true,
       };
@@ -75,7 +77,7 @@ export const getStaticProps: GetStaticProps<CourseProps> = async ({
     );
     //получаем список доступных материалов для подготовки по данному направлению
     const { data: products } = await axios.post<ProductModel[]>(
-      process.env.NEXT_PUBLIC_DOMAIN + "/api/product/find",
+      process.env.NEXT_PUBLIC_DOMAIN + '/api/product/find',
       {
         category: page.category,
         limit: 10,
