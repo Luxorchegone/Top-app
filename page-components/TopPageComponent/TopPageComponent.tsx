@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './TopPageComponent.module.css';
 import cn from 'classnames';
 import { TopPageComponentProps } from './TopPageComponent.props';
-import { Card, HhData, Htag, Tag } from '../../components';
+import { Advantages, HhData, Htag, Ptag, Tag } from '../../components';
 import { TopLevelCategory } from '../../interfaces/page.interface';
 
 export const TopPageComponent = ({ page, products, firstCategory }: TopPageComponentProps): JSX.Element => {
@@ -24,11 +24,20 @@ export const TopPageComponent = ({ page, products, firstCategory }: TopPageCompo
           hh.ru
         </Tag>
       </div>
-					{firstCategory == TopLevelCategory.Courses && page.hh && <HhData {...page.hh}/>}
-          {page.advantages && page.advantages.length > 0 && <>
-            <Htag tag='h2'>Преимущества</Htag>
-
-          </>}
+      {firstCategory == TopLevelCategory.Courses && page.hh && <HhData {...page.hh} />}
+      {page.advantages && page.advantages.length > 0 && (
+        <>
+          <Htag tag="h2">Преимущества</Htag>
+          <Advantages advantages={page.advantages} />
+        </>
+      )}
+      {page.seoText && <Ptag>{page.seoText}</Ptag>}
+      <Htag tag="h2">Получаемые навыки</Htag>
+      {page.tags.map((item) => (
+        <Tag key={item} color="primary" size={'s'}>
+          {item}
+        </Tag>
+      ))}
     </div>
   );
 };
