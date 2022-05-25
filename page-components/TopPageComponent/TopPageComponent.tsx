@@ -24,7 +24,11 @@ export const TopPageComponent = ({ page, products, firstCategory }: TopPageCompo
           hh.ru
         </Tag>
       </div>
-					{firstCategory == TopLevelCategory.Courses && <HhData {...page.hh}/>}
+					{firstCategory == TopLevelCategory.Courses && page.hh && <HhData {...page.hh}/>}
+          {page.advantages && page.advantages.length > 0 && <>
+            <Htag tag='h2'>Преимущества</Htag>
+
+          </>}
     </div>
   );
 };
