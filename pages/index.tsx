@@ -36,7 +36,7 @@ function Home({ menu }: HomeProps): JSX.Element {
         )
       })}
       </ul>
-   
+      
     </>
   );
 }
