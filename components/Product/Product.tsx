@@ -9,7 +9,7 @@ export const Product = ({ product, className, ...props }: ProductProps): JSX.Ele
   return (
     <Card color="white" className={styles.product}>
       <div className={styles.logo}>
-        <img src={process.env.NEXT_PUBLIC_DOMAIN + product.image} alt={product.title} />
+        <img height={70} width={70} src={process.env.NEXT_PUBLIC_DOMAIN + product.image} alt={product.title} />
       </div>
       <div className={styles.title}>{product.title}</div>
 
