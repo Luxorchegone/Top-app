@@ -3,7 +3,7 @@ import { ProductProps } from './Product.props';
 import styles from './Product.module.css';
 import cn from 'classnames';
 import { Card, Rating, Button, Tag, Divider } from '../index';
-import { priceRu } from '../../helpers/helpers';
+import { declOfNum, priceRu } from '../../helpers/helpers';
 
 export const Product = ({ product, className, ...props }: ProductProps): JSX.Element => {
   return (
@@ -38,7 +38,7 @@ export const Product = ({ product, className, ...props }: ProductProps): JSX.Ele
       </div>
       <div className={styles.priceTitle}>цена</div>
       <div className={styles.creditTitle}>в кредит</div>
-      <div className={styles.rateTitle}>{product.reviewCount} отзывов</div>
+      <div className={styles.rateTitle}>{product.reviewCount} {declOfNum(product.reviewCount, ['отзыв', 'отзыва', 'отзывов'])}</div>
       <Divider className={styles.hr} />
       <div className={styles.description}>{product.description}</div>
       <div className={styles.feature}>фичи</div>
