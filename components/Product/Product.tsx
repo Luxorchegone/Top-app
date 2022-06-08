@@ -4,12 +4,18 @@ import styles from './Product.module.css';
 import cn from 'classnames';
 import { Card, Rating, Button, Tag, Divider } from '../index';
 import { declOfNum, priceRu } from '../../helpers/helpers';
+import Image from 'next/image';
 
 export const Product = ({ product, className, ...props }: ProductProps): JSX.Element => {
   return (
     <Card color="white" className={styles.product}>
       <div className={styles.logo}>
-        <img height={70} width={70} src={process.env.NEXT_PUBLIC_DOMAIN + product.image} alt={product.title} />
+        <Image
+          src={product.image.includes('http') ? product.image : process.env.NEXT_PUBLIC_DOMAIN + product.image}
+          alt={product.title}
+          width={70}
+          height={70}
+        />
       </div>
       <div className={styles.title}>{product.title}</div>
 
@@ -38,10 +44,20 @@ export const Product = ({ product, className, ...props }: ProductProps): JSX.Ele
       </div>
       <div className={styles.priceTitle}>цена</div>
       <div className={styles.creditTitle}>в кредит</div>
-      <div className={styles.rateTitle}>{product.reviewCount} {declOfNum(product.reviewCount, ['отзыв', 'отзыва', 'отзывов'])}</div>
+      <div className={styles.rateTitle}>
+        {product.reviewCount} {declOfNum(product.reviewCount, ['отзыв', 'отзыва', 'отзывов'])}
+      </div>
       <Divider className={styles.hr} />
       <div className={styles.description}>{product.description}</div>
-      <div className={styles.feature}>фичи</div>
+      <div className={styles.feature}>
+        {product.characteristics.map((item) => (
+          <div key={item.name} className={styles.characteristics}>
+            <span className={styles.charcteristicsName}>{item.name}</span>
+            <span className={styles.charcteristicsDots}></span>
+            <span className={styles.charcteristicsValue}>{item.value}</span>
+          </div>
+        ))}
+      </div>
       <div className={styles.advBlock}>
         {product.advantages && (
           <div className={styles.advantages}>
