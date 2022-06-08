@@ -92,9 +92,10 @@
 }
 
 .description {
+	margin-bottom: 15px;
+
 	font-size: 16px;
 	line-height: 24px;
-	margin-bottom: 15px;
 }
 
 .reviewButton {
@@ -102,10 +103,11 @@
 }
 
 .advTitle {
-	font-weight: 700;
-	font-size: 16px;
-	line-height: 22px;
 	margin-bottom: 5px;
+
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 22px;
 }
 
 .advBlock {
@@ -114,12 +116,36 @@
 }
 
 .advantages {
-	padding-left: 15px;
-	border-left: 2px solid var(--green);
 	margin-bottom: 20px;
+	padding-left: 15px;
+
+	border-left: 2px solid var(--green);
 }
 
 .disadvantages {
 	padding-left: 15px;
+
 	border-left: 2px solid var(--red-light);
+}
+
+.characteristics {
+	display: grid;
+	grid-template-columns: auto 1fr auto;
+
+	padding-right: 60px;
+	gap: 10px;
+}
+
+.charcteristicsDots {
+	margin-bottom: 5px;
+
+	border-bottom: 1px dashed var(--gray-light);
+}
+
+.charcteristicsName {
+	font-weight: 700;
+}
+
+.charcteristicsValue {
+	text-align: right;
 }
