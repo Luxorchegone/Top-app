@@ -5,6 +5,7 @@ import cn from 'classnames';
 import { Card, Rating, Button, Tag, Divider, Review } from '../index';
 import { declOfNum, priceRu } from '../../helpers/helpers';
 import Image from 'next/image';
+import { ReviewForm } from '../ReviewForm/ReviewForm';
 
 export const Product = ({ product, className, ...props }: ProductProps): JSX.Element => {
   const [isReviewOpened, setIsReviewOpened] = useState<boolean>(false);
@@ -94,7 +95,13 @@ export const Product = ({ product, className, ...props }: ProductProps): JSX.Ele
           [styles.closed]: !isReviewOpened,
         })}
       >
-        {product.reviews.map((item) => (<Review key={item._id} review={item}/>))}
+        {product.reviews.map((item) => (
+				<>
+				<Review key={item._id} review={item}/>
+				<Divider />
+				</>
+				))}
+				<ReviewForm productId={product._id}/>
       </Card>
     </>
   );
