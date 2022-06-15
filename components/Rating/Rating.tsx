@@ -5,15 +5,8 @@ import cn from 'classnames';
 import StarIcon from './star.svg';
 import classNames from 'classnames';
 
-export const Rating = ({
-  isEditable = false,
-  setRating,
-  rating,
-  ...props
-}: RatingProps): JSX.Element => {
-  const [ratingArray, setRatingArray] = useState<JSX.Element[]>(
-    new Array(5).fill(<></>)
-  );
+export const Rating = ({ isEditable = false, setRating, rating, ...props }: RatingProps): JSX.Element => {
+  const [ratingArray, setRatingArray] = useState<JSX.Element[]>(new Array(5).fill(<></>));
 
   useEffect(() => {
     ratingConstructor(rating);
@@ -33,9 +26,7 @@ export const Rating = ({
         >
           <StarIcon
             tabIndex={isEditable ? 0 : -1}
-            onKeyDown={(e: KeyboardEvent<SVGElement>) =>
-              isEditable && handleSpace(i + 1, e)
-            }
+            onKeyDown={(e: KeyboardEvent<SVGElement>) => isEditable && handleSpace(i + 1, e)}
           />
         </span>
       );

@@ -20,11 +20,11 @@ export const Search = ({ className, ...props }: SearchProps): JSX.Element => {
     });
   };
 
-	const handleKeyDown = (e: KeyboardEvent) => {
-		if (e.key == 'Enter') {
-			goToSearch();
-		}
-	}
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.key == 'Enter') {
+      goToSearch();
+    }
+  };
 
   return (
     <div className={cn(styles.search, className)} {...props}>
@@ -33,7 +33,7 @@ export const Search = ({ className, ...props }: SearchProps): JSX.Element => {
         placeholder="Поиск..."
         value={searchText}
         onChange={(e) => setSearchText(e.target.value)}
-				onKeyDown={handleKeyDown}
+        onKeyDown={handleKeyDown}
       />
       <Button appearance="primary" className={styles.button} onClick={goToSearch}>
         <SearchIcon />

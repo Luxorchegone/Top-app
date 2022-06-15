@@ -9,9 +9,9 @@ export const Advantages = ({ advantages }: AdvantagesProps): JSX.Element => {
     <>
       {advantages.map((item) => (
         <div key={item._id} className={styles.advantage}>
-          <CheckIcon/>
+          <CheckIcon />
           <div className={styles.title}>{item.title}</div>
-          <hr className={styles.verticalLine}/>
+          <hr className={styles.verticalLine} />
           <div className={styles.description}>{item.description}</div>
         </div>
       ))}
