@@ -1,6 +1,6 @@
 .textArea {
 	padding: 7px 12px;
-
+	width: 100%;
 	color: var(--black);
 	border: none;
 	border-radius: 5px;
@@ -17,4 +17,19 @@
 
 .textArea ::placeholder {
 	color: var(--gray-placeholder);
+}
+
+.error {
+	border: 1px solid var(--red);
+}
+
+.textAreaWrapper {
+	position: relative;
+}
+
+.errorMessage {
+	position: absolute;
+	bottom: -15px;
+	left: 0px;
+	color: var(--red);
 }
