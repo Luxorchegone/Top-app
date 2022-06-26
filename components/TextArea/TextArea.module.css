@@ -3,7 +3,7 @@
 	padding: 7px 12px;
 
 	color: var(--black);
-	border: none;
+	border: 1px solid transparent; /*Что textarea не дергался при добавлении обводки*/
 	border-radius: 5px;
 	outline-color: var(--primary);
 	background: var(--white);
