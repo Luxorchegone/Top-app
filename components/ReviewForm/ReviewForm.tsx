@@ -36,7 +36,8 @@ export const ReviewForm = ({ productId, className, ...props }: ReviewFormProps):
           <Controller
             control={control}
             name="rating"
-            render={({ field }) => <Rating isEditable ref={field.ref} rating={field.value} setRating={field.onChange} />}
+						rules={{required: {value: true, message: 'Заполните рейтинг'}}}
+            render={({ field }) => <Rating isEditable error={errors.rating} ref={field.ref} rating={field.value} setRating={field.onChange} />}
           />
         </div>
         <TextArea 
