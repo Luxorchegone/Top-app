@@ -7,7 +7,7 @@ import classNames from 'classnames';
 
 export const Rating = forwardRef(
   (
-    { isEditable = false, setRating, rating, ...props }: RatingProps,
+    { isEditable = false, setRating, rating, error, className, ...props }: RatingProps,
     ref: ForwardedRef<HTMLDivElement>
   ): JSX.Element => {
     const [ratingArray, setRatingArray] = useState<JSX.Element[]>(new Array(5).fill(<></>));
@@ -60,10 +60,13 @@ export const Rating = forwardRef(
     };
 
     return (
-      <div ref={ref} {...props}>
-        {ratingArray.map((item, i) => (
-          <span key={i}>{item}</span>
-        ))}
+      <div className={cn(styles.ratingWrapper, className, {
+				[styles.error] : error
+			})} ref={ref} {...props}>
+          {ratingArray.map((item, i) => (
+            <span key={i}>{item}</span>
+          ))}
+				{error && <span className={styles.errorMessage}>{error.message}</span>}
       </div>
     );
   }
