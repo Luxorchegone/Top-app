@@ -28,14 +28,25 @@
 	gap: 20px;
 }
 
-.success {
+.panel {
 	position: relative;
 
 	margin-top: 20px;
 	padding: 20px;
 
 	border-radius: 5px;
+}
+
+.success {
 	background: var(--green-light);
+}
+
+.error .closeIcon path {
+	stroke: var(--red);
+}
+
+.error {
+	background: var(--red-light);
 }
 
 .successTitle {
