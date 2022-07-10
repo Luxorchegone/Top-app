@@ -21,16 +21,17 @@ a {
 :root {
 	--black: #3B434E;
 	--white: #FFF;
-	--primary: #7653FC;
+	--primary: #7351f5;
 	--primary-hover: #6343E2;
 	--red-light: #FC836D;
-	--green: #1DC37E;
+	--green: #007b48;
+	--green-border: #1DC37E;
 	--green-light: #C8F8E4;
 	--background: #F5F6F8;
 	--gray-light: #EBEBEB;
-	--gray-dark: #787D85;
+	--gray-dark: #6c7077;
 	--gray-placeholder: #A4A4A4;
-	--gray: #B3C0D9;
+	--gray: #51648c;
 	--red: #DE0000;
 	--blue: #F9F8FF;
 	--font-family:
