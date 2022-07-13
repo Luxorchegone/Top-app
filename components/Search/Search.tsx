@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, KeyboardEvent } from 'react';
 import { SearchProps } from './Search.props';
 import styles from './Search.module.css';
 import cn from 'classnames';
@@ -35,7 +35,7 @@ export const Search = ({ className, ...props }: SearchProps): JSX.Element => {
         onChange={(e) => setSearchText(e.target.value)}
         onKeyDown={handleKeyDown}
       />
-      <Button appearance="primary" className={styles.button} onClick={goToSearch}>
+      <Button appearance="primary" className={styles.button} onClick={goToSearch} aria-label="Искать по сайту">
         <SearchIcon />
       </Button>
     </div>
