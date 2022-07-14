@@ -33,7 +33,9 @@ export const ReviewForm = ({ productId, isOpened, className, ...props }: ReviewF
         setError('что то пошлое не так!');
       }
     } catch (e) {
-      setError(e.message);
+      if (e instanceof Error) {
+        setError(e.message);
+      }
     }
   };
 
@@ -79,22 +81,28 @@ export const ReviewForm = ({ productId, isOpened, className, ...props }: ReviewF
           tabIndex={isOpened ? 0 : -1}
         />
         <div className={styles.submit}>
-          <Button appearance="primary" tabIndex={isOpened ? 0 : -1}>Отправить</Button>
+          <Button appearance="primary" tabIndex={isOpened ? 0 : -1}>
+            Отправить
+          </Button>
           <span className={styles.info}>* Перед публикацией отзыв пройдет предварительную модерацию и проверку</span>
         </div>
       </div>
       {isSuccess && (
-        <div className={cn(styles.panel, styles.success)}>
+        <div className={cn(styles.panel, styles.success)} role="alert">
           <div className={styles.successTitle}>Ваш отзыв отправлен</div>
           <div>Спасибо. ваш отзыв будет опубликован после проверки!</div>
-          <CloseIcon onClick={() => setIsSuccess(false)} className={styles.closeIcon} />
+          <button className={styles.closeIcon} onClick={() => setIsSuccess(false)} aria-label="Закрыть">
+            <CloseIcon />
+          </button>
         </div>
       )}
       {error && (
-        <div className={cn(styles.panel, styles.error)}>
+        <div className={cn(styles.panel, styles.error)} role="alert">
           Что то пошло не так, попробуйте обновить страницу!
           {error}
-          <CloseIcon onClick={() => setError(undefined)} className={styles.closeIcon} />
+          <button className={styles.closeIcon} onClick={() => setError(undefined)} aria-label="Закрыть">
+            <CloseIcon />
+          </button>
         </div>
       )}
     </form>
