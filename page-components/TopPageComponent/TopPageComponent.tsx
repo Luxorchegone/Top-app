@@ -8,14 +8,17 @@ import { SortEnum } from '../../components/Sort/Sort.props';
 import { sortReducer } from './sort.reducer';
 
 export const TopPageComponent = ({ page, products, firstCategory }: TopPageComponentProps): JSX.Element => {
-  const [{ products: sortedProducts, sort}, dispatchSort] = useReducer(sortReducer, { products, sort: SortEnum.Rating });
+  const [{ products: sortedProducts, sort }, dispatchSort] = useReducer(sortReducer, {
+    products,
+    sort: SortEnum.Rating,
+  });
 
   const setSort = (sort: SortEnum) => {
-    dispatchSort({type: sort});
+    dispatchSort({ type: sort });
   };
 
-  useEffect(()=> {
-      dispatchSort({type: 'reset', initialState: products});
+  useEffect(() => {
+    dispatchSort({ type: 'reset', initialState: products });
   }, [products]);
 
   return (
@@ -27,12 +30,9 @@ export const TopPageComponent = ({ page, products, firstCategory }: TopPageCompo
             {products.length}
           </Tag>
         )}
-        <Sort
-          sort={sort}
-          setSort={setSort}
-        />
+        <Sort sort={sort} setSort={setSort} />
       </div>
-      <div>{sortedProducts && sortedProducts.map((p) => <Product layout key={p._id} product={p}/>)}</div>
+      <div role={'list'}>{sortedProducts && sortedProducts.map((p) => <Product role='listitem' layout key={p._id} product={p} />)}</div>
       <div className={styles.hhTitle}>
         <Htag tag="h2">Вакансии - {page.category}</Htag>
         <Tag color="red" size="m">
