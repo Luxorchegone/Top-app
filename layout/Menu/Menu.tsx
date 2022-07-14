@@ -1,4 +1,4 @@
-import React, { useContext, KeyboardEvent } from 'react';
+import React, { useContext, KeyboardEvent, useState } from 'react';
 import styles from './Menu.module.css';
 import { AppContext } from '../../context/app.context';
 import { FirstLevelMenuItem, PageItem } from '../../interfaces/menu.interface';
@@ -10,6 +10,7 @@ import { motion } from 'framer-motion';
 
 export const Menu = (): JSX.Element => {
   const { menu, setMenu, firstCategory } = useContext(AppContext);
+  const [announce, setAnnounce] = useState<'closed' | 'opened' | undefined>();
   const router = useRouter();
 
   const variants = {
@@ -41,6 +42,7 @@ export const Menu = (): JSX.Element => {
       setMenu(
         menu.map((m) => {
           if (m._id.secondCategory == secondCategory) {
+            setAnnounce(m.isOpened ? 'closed' : 'opened');
             m.isOpened = !m.isOpened;
           }
           return m;
@@ -57,10 +59,10 @@ export const Menu = (): JSX.Element => {
 
   const buildFirstLevel = () => {
     return (
-      <>
+      <ul className={styles.firstLevelList}>
         {firstLevelMenu.map((item) => {
           return (
-            <div key={item.route}>
+            <li key={item.route} aria-expanded={item.id == firstCategory}>
               <Link href={`/${item.route}`}>
                 <a>
                   <div
@@ -74,62 +76,73 @@ export const Menu = (): JSX.Element => {
                 </a>
               </Link>
               {item.id == firstCategory && buildSecondLevel(item)}
-            </div>
+            </li>
           );
         })}
-      </>
+      </ul>
     );
   };
 
   const buildSecondLevel = (menuItem: FirstLevelMenuItem) => {
     return (
-      <div className={styles.secondBlock}>
+      <ul className={styles.secondBlock}>
         {menu.map((m) => {
           if (m.pages.map((p) => p.alias).includes(router.asPath.split('/')[2])) {
             m.isOpened = true;
           }
           return (
-            <div key={m._id.secondCategory}>
-              <div
+            <li key={m._id.secondCategory}>
+              <button
                 tabIndex={0}
                 onKeyDown={(key: KeyboardEvent) => openSecondLevelKey(key, m._id.secondCategory)}
                 className={styles.secondLevel}
                 onClick={() => openSecondLevel(m._id.secondCategory)}
+                aria-expanded={m.isOpened}
               >
                 {m._id.secondCategory}
-              </div>
-              <motion.div
+              </button>
+              <motion.ul
                 layout={true}
                 variants={variants}
                 initial={m.isOpened ? 'visible' : 'hidden'}
                 animate={m.isOpened ? 'visible' : 'hidden'}
-                className={cn(styles.secondLevelBlock)}
+                className={styles.secondLevelBlock}
               >
                 {buildThirdLevel(m.pages, menuItem.route, m.isOpened ?? false)}
-              </motion.div>
-            </div>
+              </motion.ul>
+            </li>
           );
         })}
-      </div>
+      </ul>
     );
   };
 
   const buildThirdLevel = (pages: PageItem[], route: string, isOpened: boolean) => {
     return pages.map((page) => (
-      <motion.div key={page._id} variants={variantsChildren}>
+      <motion.li key={page._id} variants={variantsChildren}>
         <Link href={`/${route}/${page.alias}`}>
           <a
             tabIndex={isOpened ? 0 : -1}
             className={cn(styles.thirdLevel, {
               [styles.thirdLevelActive]: `/${route}/${page.alias}` == router.asPath,
             })}
+            aria-current={`/${route}/${page.alias}` == router.asPath ? 'page' : false}
           >
             {page.category}
           </a>
         </Link>
-      </motion.div>
+      </motion.li>
     ));
   };
 
-  return <nav className={styles.menu} role="navigation">{buildFirstLevel()}</nav>;
+  return (
+    <nav className={styles.menu} role="navigation">
+      {announce && (
+        <span role={'log'} className={'visualyHidden'}>
+          {announce == 'opened' ? 'развернуто' : 'свернуто'}
+        </span>
+      )}
+      {buildFirstLevel()}
+    </nav>
+  );
 };
